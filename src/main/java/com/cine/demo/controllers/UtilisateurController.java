@@ -1,7 +1,7 @@
 package com.cine.demo.controllers;
 
-import com.cine.demo.entities.Client;
-import com.cine.demo.repositories.ClientRepository;
+import com.cine.demo.entities.Utilisateur;
+import com.cine.demo.repositories.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping
-public class ClientController {
+public class UtilisateurController {
     @Autowired
-    private ClientRepository repository;
+    private UtilisateurRepository repository;
 
 
     @GetMapping(path="/api/client")
-    public @ResponseBody Iterable<Client> allClient(){
+    public @ResponseBody Iterable<Utilisateur> allClient(){
         return repository.findAll();
     }
 }
