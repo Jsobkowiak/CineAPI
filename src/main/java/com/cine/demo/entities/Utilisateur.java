@@ -16,6 +16,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name="client")
+@Entity(name = "utilisateur")
 public class Utilisateur {
 
 

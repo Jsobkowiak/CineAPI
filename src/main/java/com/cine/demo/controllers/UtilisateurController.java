@@ -15,8 +15,8 @@ public class UtilisateurController {
     private UtilisateurRepository repository;
 
 
-    @GetMapping(path="/api/client")
-    public @ResponseBody Iterable<Utilisateur> allClient(){
+    @GetMapping(path="/api/utilisateur")
+    public @ResponseBody Iterable<Utilisateur> allUtilisateur(){
         return repository.findAll();
     }
 }
