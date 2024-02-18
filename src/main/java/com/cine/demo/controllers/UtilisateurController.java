@@ -4,9 +4,9 @@ import com.cine.demo.entities.Utilisateur;
 import com.cine.demo.repositories.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping
@@ -15,8 +15,19 @@ public class UtilisateurController {
     private UtilisateurRepository repository;
 
 
-    @GetMapping(path="/api/utilisateur")
-    public @ResponseBody Iterable<Utilisateur> allUtilisateur(){
+    @GetMapping(path="/api/getAllUtilisateurs")
+    public @ResponseBody Iterable<Utilisateur> getAllUtilisateurs(){
         return repository.findAll();
+    }
+
+    @GetMapping(path="/api/getUtilisateur/{id}")
+    public @ResponseBody Optional<Utilisateur> getUtilisateurById(@PathVariable Long id){
+        return repository.findById(id);
+    }
+
+    @PostMapping(path = "/api/postUtilisateur")
+    public @ResponseBody String postUtilisateur(@RequestBody Utilisateur user){
+        repository.save(user);
+        return "200";
     }
 }
