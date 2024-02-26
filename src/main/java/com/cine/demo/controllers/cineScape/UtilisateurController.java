@@ -1,4 +1,4 @@
-package com.cine.demo.controllers;
+package com.cine.demo.controllers.cineScape;
 
 import com.cine.demo.entities.Utilisateur;
 import com.cine.demo.repositories.UtilisateurRepository;
