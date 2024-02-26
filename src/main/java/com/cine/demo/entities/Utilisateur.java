@@ -46,11 +46,9 @@ public class Utilisateur {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "idUtilisateur", cascade = CascadeType.ALL)
     private List<Commentaire> commentaireList;
 
-    @ManyToMany
-    @JoinTable(name = "wishlist_todo", joinColumns = @JoinColumn(name = "id_utilisateur"), inverseJoinColumns = @JoinColumn(name = "id_media"))
-    private List<Media> wishlistTODO;
+    @OneToMany(mappedBy = "idUtilisateur")
+    private List<WishlistDid> wishlistDidList;
 
-    @ManyToMany
-    @JoinTable(name = "wishlist_did", joinColumns = @JoinColumn(name = "id_utilisateur"), inverseJoinColumns = @JoinColumn(name = "id_media"))
-    private List<Media> wishlistDID;
+    @OneToMany(mappedBy = "idUtilisateur")
+    private List<WishlistTodo> wishlistTodoList;
 }

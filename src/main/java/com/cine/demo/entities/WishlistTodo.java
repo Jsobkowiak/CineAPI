@@ -10,16 +10,13 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="note")
-public class Note {
+@Entity(name="wishlistTodo")
+public class WishlistTodo {
 
     @Id
     @GeneratedValue
     @Column(name="id")
     private Long id;
-
-    @Column(name="note")
-    private int note;
 
     @ManyToOne
     @JoinColumn(name = "id_utilisateur", nullable=false)

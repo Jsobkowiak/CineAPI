@@ -6,24 +6,22 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="genre")
-public class Genre {
+@Entity(name="wishlistDid")
+public class WishlistDid {
+
     @Id
     @GeneratedValue
     @Column(name="id")
     private Long id;
 
-    @Column(name="libelle")
-    private String libelle;
+    @ManyToOne
+    @JoinColumn(name = "id_utilisateur", nullable=false)
+    private Utilisateur idUtilisateur;
 
-    @ManyToMany
-    @JoinTable(name = "type", joinColumns = @JoinColumn(name = "id_media"), inverseJoinColumns = @JoinColumn(name = "id_genre"))
-    private List<Media> mediaList;
-
+    @Column(name="id_media")
+    private Long idMedia;
 }

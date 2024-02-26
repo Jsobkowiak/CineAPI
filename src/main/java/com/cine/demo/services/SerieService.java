@@ -32,4 +32,14 @@ public class SerieService {
                 String.class
         );
     }
+
+    public ResponseEntity<String> getSerieDetail(int idSerie) {
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.exchange(
+                this.URL + "/tv/"+idSerie+"?language=fr-FR",
+                HttpMethod.GET,
+                HttpEntityService.createHttpEntity(),
+                String.class
+        );
+    }
 }

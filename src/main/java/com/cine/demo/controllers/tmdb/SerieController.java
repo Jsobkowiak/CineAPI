@@ -27,4 +27,10 @@ public class SerieController {
         return this.serieService.searchSeries(name, nbPage);
     }
 
+    @GetMapping(path="/getSerieById/{idSerie}")
+    public @ResponseBody ResponseEntity<String> getSerieById(@PathVariable int idSerie){
+        return this.serieService.getSerieDetail(idSerie);
+    }
+
+
 }

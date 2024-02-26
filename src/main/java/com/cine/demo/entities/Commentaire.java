@@ -25,7 +25,6 @@ public class Commentaire {
     @JoinColumn(name = "id_utilisateur", nullable=false)
     private Utilisateur idUtilisateur;
 
-    @ManyToOne
-    @JoinColumn(name = "id_media", nullable=false)
-    private Media idMedia;
+    @Column(name="id_media")
+    private Long idMedia;
 }
