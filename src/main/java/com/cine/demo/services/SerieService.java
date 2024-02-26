@@ -1,9 +1,7 @@
 package com.cine.demo.services;
 
-import io.github.cdimascio.dotenv.Dotenv;
 import lombok.NoArgsConstructor;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -11,28 +9,26 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 @NoArgsConstructor
-public class MovieService {
+public class SerieService {
     private final String URL = "https://api.themoviedb.org/3/";
 
-    public ResponseEntity<String> getAllMovies(int nbPage) {
-        HttpEntity<String> entity = new HttpEntity<>(HeaderService.createHeaders());
+    public ResponseEntity<String> getAllSeries(int nbPage) {
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.exchange(
-                this.URL + "popular?language=fr-FR&page=" + nbPage,
+                this.URL + "tv/popular?language=fr-FR&page=" + nbPage,
                 HttpMethod.GET,
-                entity,
+                HttpEntityService.createHttpEntity(),
                 String.class
         );
     }
 
-    public ResponseEntity<String> searchFilms(String name, int nbPage) {
-        HttpEntity<String> entity = new HttpEntity<>(HeaderService.createHeaders());
+    public ResponseEntity<String> searchSeries(String name, int nbPage) {
         RestTemplate restTemplate = new RestTemplate();
         System.out.println(this.URL + "search/movie?query="+name+"&include_adult=false&language=fr-FR&page="+nbPage);
         return restTemplate.exchange(
-                this.URL + "search/movie?query="+name+"&include_adult=false&language=fr-FR&page="+nbPage,
+                this.URL + "search/tv?query="+name+"&include_adult=false&language=fr-FR&page="+nbPage,
                 HttpMethod.GET,
-                entity,
+                HttpEntityService.createHttpEntity(),
                 String.class
         );
     }

@@ -16,12 +16,12 @@ public class GenreMediaController {
 
     @Autowired
     private GenreService genreService;
-    @GetMapping(path="/getMovieGenres/")
+    @GetMapping(path="/getMovieGenres")
     public @ResponseBody ResponseEntity<String> getMovieGenres(){
         return this.genreService.getAllMovieGenres();
     }
 
-    @GetMapping(path="/searchMovies/{name}/{nbPage}")
+    @GetMapping(path="/getSerieGenres")
     public @ResponseBody ResponseEntity<String> getSerieGenres(){
         return this.genreService.getAllSerieGenres();
     }

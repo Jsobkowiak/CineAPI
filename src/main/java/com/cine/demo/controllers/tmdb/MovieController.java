@@ -1,4 +1,4 @@
-package com.cine.demo.controllers;
+package com.cine.demo.controllers.tmdb;
 
 import com.cine.demo.services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +20,11 @@ public class MovieController {
     @GetMapping(path="/searchMovies/{name}/{nbPage}")
     public @ResponseBody ResponseEntity<String> searchMovies(@PathVariable String name, @PathVariable int nbPage){
         return this.movieService.searchFilms(name, nbPage);
+    }
+
+    @GetMapping(path="/getMovieById/{idMovie}")
+    public @ResponseBody ResponseEntity<String> getMovieById(@PathVariable int idMovie){
+        return this.movieService.getMovieDetail(idMovie);
     }
 
 }
