@@ -14,7 +14,6 @@ public class UtilisateurController {
     @Autowired
     private UtilisateurRepository repository;
 
-
     @GetMapping(path="/api/getAllUtilisateurs")
     public @ResponseBody Iterable<Utilisateur> getAllUtilisateurs(){
         return repository.findAll();
@@ -30,4 +29,9 @@ public class UtilisateurController {
         repository.save(user);
         return "200";
     }
+    @GetMapping(path="/api/utilisateur")
+    public @ResponseBody Iterable<Utilisateur> allUtilisateur(){
+        return repository.findAll();
+    }
+
 }
