@@ -1,7 +1,6 @@
 package com.cine.demo.services;
 
 import lombok.NoArgsConstructor;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

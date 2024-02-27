@@ -1,7 +1,6 @@
 package com.cine.demo.entities;
 
 import jakarta.persistence.*;
-import jdk.jshell.execution.Util;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
