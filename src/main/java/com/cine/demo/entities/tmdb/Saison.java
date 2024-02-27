@@ -1,7 +1,15 @@
 package com.cine.demo.entities.tmdb;
 
-import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.util.Date;
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Saison {
     private int id;
 
@@ -10,11 +18,4 @@ public class Saison {
     private Date release_date;
 
     private int episode_count;
-
-    public Saison(int id, String name, Date release_date, int episode_count) {
-        this.id = id;
-        this.name = name;
-        this.release_date = release_date;
-        this.episode_count = episode_count;
-    }
 }

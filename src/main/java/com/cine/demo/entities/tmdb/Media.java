@@ -1,5 +1,14 @@
 package com.cine.demo.entities.tmdb;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public abstract class Media {
 
     private int id;
@@ -13,12 +22,4 @@ public abstract class Media {
 
     private Iterable<Genre> genres;
 
-    public Media(int id, String title, String backgdrop_path, String poster_path, String desc, Iterable<Genre> genres) {
-        this.id = id;
-        this.title = title;
-        this.backgdrop_path = backgdrop_path;
-        this.poster_path = poster_path;
-        this.desc = desc;
-        this.genres = genres;
-    }
 }
