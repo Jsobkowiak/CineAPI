@@ -9,23 +9,23 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @Controller
-@RequestMapping
+@RequestMapping(path = "/cineScape")
 public class CategorieForumController {
     @Autowired
     private CategorieForumRepository repository;
 
 
-    @GetMapping(path="/api/getAllCategoriesForum")
+    @GetMapping(path="/getAllCategoriesForum")
     public @ResponseBody Iterable<CategorieForum> getAllCategoriesForum(){
         return repository.findAll();
     }
 
-    @GetMapping(path="/api/getCategorieForum/{id}")
+    @GetMapping(path="/getCategorieForum/{id}")
     public @ResponseBody Optional<CategorieForum> getCategorieForumById(@PathVariable Long id){
         return repository.findById(id);
     }
 
-    @PostMapping(path = "/api/postCategorieForum")
+    @PostMapping(path = "/postCategorieForum")
     public @ResponseBody String postCategorieForum(@RequestBody CategorieForum com){
         repository.save(com);
         return "200";

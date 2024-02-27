@@ -9,29 +9,24 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @Controller
-@RequestMapping
+@RequestMapping(path = "/cineScape")
 public class UtilisateurController {
     @Autowired
     private UtilisateurRepository repository;
 
-    @GetMapping(path="/api/getAllUtilisateurs")
+    @GetMapping(path="/getAllUtilisateurs")
     public @ResponseBody Iterable<Utilisateur> getAllUtilisateurs(){
         return repository.findAll();
     }
 
-    @GetMapping(path="/api/getUtilisateur/{id}")
+    @GetMapping(path="/getUtilisateur/{id}")
     public @ResponseBody Optional<Utilisateur> getUtilisateurById(@PathVariable Long id){
         return repository.findById(id);
     }
 
-    @PostMapping(path = "/api/postUtilisateur")
+    @PostMapping(path = "/postUtilisateur")
     public @ResponseBody String postUtilisateur(@RequestBody Utilisateur user){
         repository.save(user);
         return "200";
     }
-    @GetMapping(path="/api/utilisateur")
-    public @ResponseBody Iterable<Utilisateur> allUtilisateur(){
-        return repository.findAll();
-    }
-
 }

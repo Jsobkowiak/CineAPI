@@ -9,23 +9,23 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @Controller
-@RequestMapping
+@RequestMapping(path = "/cineScape")
 public class SujetController {
     @Autowired
     private SujetRepository repository;
 
 
-    @GetMapping(path="/api/getAllSujet")
+    @GetMapping(path="/getAllSujet")
     public @ResponseBody Iterable<Sujet> getAllSujets(){
         return repository.findAll();
     }
 
-    @GetMapping(path="/api/getSujet/{id}")
+    @GetMapping(path="/getSujet/{id}")
     public @ResponseBody Optional<Sujet> getSujetById(@PathVariable Long id){
         return repository.findById(id);
     }
 
-    @PostMapping(path = "/api/postSujet")
+    @PostMapping(path = "/postSujet")
     public @ResponseBody String postSujet(@RequestBody Sujet com){
         repository.save(com);
         return "200";

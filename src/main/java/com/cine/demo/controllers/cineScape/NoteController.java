@@ -9,23 +9,23 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @Controller
-@RequestMapping
+@RequestMapping(path = "/cineScape")
 public class NoteController {
     @Autowired
     private NoteRepository repository;
 
 
-    @GetMapping(path="/api/getAllNote")
+    @GetMapping(path="/getAllNote")
     public @ResponseBody Iterable<Note> getAllNotes(){
         return repository.findAll();
     }
 
-    @GetMapping(path="/api/getNote/{id}")
+    @GetMapping(path="/getNote/{id}")
     public @ResponseBody Optional<Note> getNoteById(@PathVariable Long id){
         return repository.findById(id);
     }
 
-    @PostMapping(path = "/api/postNote")
+    @PostMapping(path = "/postNote")
     public @ResponseBody String postNote(@RequestBody Note com){
         repository.save(com);
         return "200";
