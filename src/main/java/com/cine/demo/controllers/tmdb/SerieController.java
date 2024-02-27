@@ -17,13 +17,19 @@ public class SerieController {
     @Autowired
     private SerieService serieService;
 
-    @GetMapping(path="/getPopularSeries/{nbPage}")
-    public @ResponseBody ResponseEntity<String> getPopularSeries(@PathVariable int nbPage){
+    @GetMapping(value= {"/getPopularSeries", "/getPopularSeries/{nbPage}"})
+    public @ResponseBody ResponseEntity<String> getPopularSeries(@PathVariable(required = false) String nbPage){
+        if(nbPage == null){
+            nbPage = "1";
+        }
         return this.serieService.getAllSeries(nbPage);
     }
 
-    @GetMapping(path="/searchSeries/{name}/{nbPage}")
-    public @ResponseBody ResponseEntity<String> searchSeries(@PathVariable String name, @PathVariable int nbPage){
+    @GetMapping(value= {"/searchSeries/{name}","/searchSeries/{name}/{nbPage}"})
+    public @ResponseBody ResponseEntity<String> searchSeries(@PathVariable String name, @PathVariable(required = false) String nbPage){
+        if(nbPage == null){
+            nbPage = "1";
+        }
         return this.serieService.searchSeries(name, nbPage);
     }
 

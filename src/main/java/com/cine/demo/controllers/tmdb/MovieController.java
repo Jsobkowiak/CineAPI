@@ -12,13 +12,19 @@ public class MovieController {
 
     @Autowired
     private MovieService movieService;
-    @GetMapping(path="/getPopularMovies/{nbPage}")
-    public @ResponseBody ResponseEntity<String> getPopularMovies(@PathVariable int nbPage){
+    @GetMapping(value = {"/getPopularMovies", "/getPopularMovies/{nbPage}"})
+    public @ResponseBody ResponseEntity<String> getPopularMovies(@PathVariable(required = false) String nbPage){
+        if(nbPage == null){
+            nbPage = "1";
+        }
         return this.movieService.getAllMovies(nbPage);
     }
 
-    @GetMapping(path="/searchMovies/{name}/{nbPage}")
-    public @ResponseBody ResponseEntity<String> searchMovies(@PathVariable String name, @PathVariable int nbPage){
+    @GetMapping(value= {"/searchMovies/{name}", "/searchMovies/{name}/{nbPage}"})
+    public @ResponseBody ResponseEntity<String> searchMovies(@PathVariable String name, @PathVariable(required = false) String nbPage){
+        if(nbPage == null){
+            nbPage = "1";
+        }
         return this.movieService.searchFilms(name, nbPage);
     }
 

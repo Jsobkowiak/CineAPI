@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 public class MovieService {
     private final String URL = "https://api.themoviedb.org/3/";
 
-    public ResponseEntity<String> getAllMovies(int nbPage) {
+    public ResponseEntity<String> getAllMovies(String nbPage) {
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.exchange(
                 this.URL + "/movie/popular?language=fr-FR&page=" + nbPage,
@@ -22,7 +22,7 @@ public class MovieService {
         );
     }
 
-    public ResponseEntity<String> searchFilms(String name, int nbPage) {
+    public ResponseEntity<String> searchFilms(String name, String nbPage) {
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.exchange(
                 this.URL + "search/movie?query="+name+"&include_adult=false&language=fr-FR&page="+nbPage,
