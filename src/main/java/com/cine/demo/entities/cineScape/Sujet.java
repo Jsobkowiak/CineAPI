@@ -1,4 +1,4 @@
-package com.cine.demo.entities;
+package com.cine.demo.entities.cineScape;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

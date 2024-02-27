@@ -1,6 +1,6 @@
 package com.cine.demo.controllers.cineScape;
 
-import com.cine.demo.entities.CategorieForum;
+import com.cine.demo.entities.cineScape.CategorieForum;
 import com.cine.demo.repositories.CategorieForumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -1,4 +1,4 @@
-package com.cine.demo.entities;
+package com.cine.demo.entities.cineScape;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -10,18 +10,22 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="wishlistTodo")
-public class WishlistTodo {
+@Entity(name="message")
+public class Message {
 
     @Id
     @GeneratedValue
     @Column(name="id")
     private Long id;
 
+    @Column(name="text")
+    private String text;
+
     @ManyToOne
     @JoinColumn(name = "id_utilisateur", nullable=false)
     private Utilisateur idUtilisateur;
 
-    @Column(name="id_media")
-    private Long idMedia;
+    @ManyToOne
+    @JoinColumn(name = "id_sujet", nullable=false)
+    private Sujet idSujet;
 }

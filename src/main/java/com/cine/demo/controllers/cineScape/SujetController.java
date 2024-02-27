@@ -1,6 +1,6 @@
 package com.cine.demo.controllers.cineScape;
 
-import com.cine.demo.entities.Sujet;
+import com.cine.demo.entities.cineScape.Sujet;
 import com.cine.demo.repositories.SujetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

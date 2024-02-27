@@ -1,4 +1,4 @@
-package com.cine.demo.entities;
+package com.cine.demo.entities.cineScape;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -10,16 +10,16 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="note")
-public class Note {
+@Entity(name="commentaire")
+public class Commentaire {
 
     @Id
     @GeneratedValue
     @Column(name="id")
     private Long id;
 
-    @Column(name="note")
-    private int note;
+    @Column(name="text")
+    private String text;
 
     @ManyToOne
     @JoinColumn(name = "id_utilisateur", nullable=false)
