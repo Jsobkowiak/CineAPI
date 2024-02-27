@@ -16,8 +16,8 @@ public class Serie extends Media{
 
     private int numberSaisons;
 
-    public Serie(Iterable<Saison> seasons, int numberEpisodes, int numberSaisons, int id, String title, String backgdrop_path, String poster_path, String desc, Iterable<Genre> genres) {
-        super(id, title, backgdrop_path, poster_path, desc, genres);
+    public Serie(Iterable<Saison> seasons, int numberEpisodes, int numberSaisons, int id, String title, String backdrop_path, String poster_path, String desc, Iterable<Genre> genres) {
+        super(id, title, backdrop_path, poster_path, desc, genres);
         this.seasons = seasons;
         this.numberEpisodes = numberEpisodes;
         this.numberSaisons = numberSaisons;

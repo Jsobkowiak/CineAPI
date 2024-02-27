@@ -18,4 +18,8 @@ public class Saison {
     private Date release_date;
 
     private int episode_count;
+
+    private String overview;
+
+    private String poster_path;
 }

@@ -14,7 +14,7 @@ public abstract class Media {
     private int id;
     private String title;
 
-    private String backgdrop_path;
+    private String backdrop_path;
 
     private String poster_path;
 
