@@ -3,6 +3,7 @@ package com.cine.demo.controllers.cineScape;
 import com.cine.demo.entities.cineScape.CategorieForum;
 import com.cine.demo.repositories.CategorieForumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,8 +27,8 @@ public class CategorieForumController {
     }
 
     @PostMapping(path = "/postCategorieForum")
-    public @ResponseBody String postCategorieForum(@RequestBody CategorieForum com){
+    public @ResponseBody ResponseEntity<String> postCategorieForum(@RequestBody CategorieForum com){
         repository.save(com);
-        return "200";
+        return ResponseEntity.ok("categorie forum created");
     }
 }

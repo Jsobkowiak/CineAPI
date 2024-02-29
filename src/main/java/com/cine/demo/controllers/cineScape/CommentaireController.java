@@ -3,6 +3,7 @@ package com.cine.demo.controllers.cineScape;
 import com.cine.demo.entities.cineScape.Commentaire;
 import com.cine.demo.repositories.CommentaireRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,8 +27,8 @@ public class CommentaireController {
     }
 
     @PostMapping(path = "/postCommentaire")
-    public @ResponseBody String postCommentaire(@RequestBody Commentaire com){
+    public @ResponseBody ResponseEntity<String> postCommentaire(@RequestBody Commentaire com){
         repository.save(com);
-        return "200";
+        return ResponseEntity.ok("commentaire created");
     }
 }

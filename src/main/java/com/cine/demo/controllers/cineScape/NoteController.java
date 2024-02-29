@@ -3,6 +3,7 @@ package com.cine.demo.controllers.cineScape;
 import com.cine.demo.entities.cineScape.Note;
 import com.cine.demo.repositories.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,8 +27,8 @@ public class NoteController {
     }
 
     @PostMapping(path = "/postNote")
-    public @ResponseBody String postNote(@RequestBody Note com){
+    public @ResponseBody ResponseEntity<String> postNote(@RequestBody Note com){
         repository.save(com);
-        return "200";
+        return ResponseEntity.ok("note created");
     }
 }
