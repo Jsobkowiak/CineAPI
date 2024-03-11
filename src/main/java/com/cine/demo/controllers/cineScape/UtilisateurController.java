@@ -13,6 +13,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @Controller
 @RequestMapping(path = "/cineScape")
 public class UtilisateurController {
