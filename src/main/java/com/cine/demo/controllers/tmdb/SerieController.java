@@ -1,5 +1,7 @@
 package com.cine.demo.controllers.tmdb;
 
+import com.cine.demo.entities.tmdb.Media;
+import com.cine.demo.entities.tmdb.Search;
 import com.cine.demo.entities.tmdb.Serie;
 import com.cine.demo.services.SerieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,7 @@ public class SerieController {
     private SerieService serieService;
 
     @GetMapping(value= {"/getPopularSeries", "/getPopularSeries/{nbPage}"})
-    public @ResponseBody ResponseEntity<Iterable<Serie>> getPopularSeries(@PathVariable(required = false) String nbPage){
+    public @ResponseBody ResponseEntity<Iterable<Media>> getPopularSeries(@PathVariable(required = false) String nbPage){
         if(nbPage == null){
             nbPage = "1";
         }
@@ -24,7 +26,7 @@ public class SerieController {
     }
 
     @GetMapping(value= {"/searchSeries/{name}","/searchSeries/{name}/{nbPage}"})
-    public @ResponseBody ResponseEntity<Iterable<Serie>> searchSeries(@PathVariable String name, @PathVariable(required = false) String nbPage){
+    public @ResponseBody ResponseEntity<Search> searchSeries(@PathVariable String name, @PathVariable(required = false) String nbPage){
         if(nbPage == null){
             nbPage = "1";
         }

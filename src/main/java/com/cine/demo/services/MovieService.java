@@ -1,7 +1,9 @@
 package com.cine.demo.services;
 
 import com.cine.demo.entities.tmdb.Genre;
+import com.cine.demo.entities.tmdb.Media;
 import com.cine.demo.entities.tmdb.Movie;
+import com.cine.demo.entities.tmdb.Search;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
@@ -29,7 +31,7 @@ public class MovieService {
     private GenreService genreService;
 
 
-    public Iterable<Movie> getAllMovies(String nbPage) {
+    public Iterable<Media> getAllMovies(String nbPage) {
         ResponseEntity<Map> response = restTemplate.exchange(
                 this.URL + "/movie/popular?language=fr-FR&page=" + nbPage,
                 HttpMethod.GET,
@@ -39,14 +41,14 @@ public class MovieService {
         return createMovieArray(response);
     }
 
-    public Iterable<Movie> searchFilms(String name, String nbPage) {
+    public Search searchFilms(String name, String nbPage) {
         ResponseEntity<Map> response = restTemplate.exchange(
                 this.URL + "search/movie?query=" + name + "&include_adult=false&language=fr-FR&page=" + nbPage,
                 HttpMethod.GET,
                 HttpEntityService.createHttpEntity(),
                 Map.class
         );
-        return createMovieArray(response);
+        return new Search((int) response.getBody().get("total_pages"),(int) response.getBody().get("total_results"), createMovieArray(response));
     }
 
     public Movie getMovieDetail(int idMovie) {
@@ -68,9 +70,9 @@ public class MovieService {
         return createMovie(body, genresMovies);
     }
 
-    private Iterable<Movie> createMovieArray(ResponseEntity<Map> response) {
+    private Iterable<Media> createMovieArray(ResponseEntity<Map> response) {
         // ARRAY DE RETOUR (LISTE DE MOVIE)
-        ArrayList<Movie> movies = new ArrayList<>();
+        ArrayList<Media> medias = new ArrayList<>();
 
         // BODY DU RETOUR DE L'APPEL API
         ArrayList body = (ArrayList) response.getBody().get("results");
@@ -96,11 +98,10 @@ public class MovieService {
                     }
                 }
             }
-
             // CREATION ET AJOUT D'UN MOVIE A L'ARRAY DE RETOUR
-            movies.add(createMovie(movieInfo, genresMovies));
+            medias.add((Media) createMovie(movieInfo, genresMovies));
         }
-        return movies;
+        return medias;
     }
 
     private Movie createMovie(Map body, Iterable<Genre> genres) {

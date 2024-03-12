@@ -1,6 +1,7 @@
 package com.cine.demo.controllers.tmdb;
 
 import com.cine.demo.entities.tmdb.Media;
+import com.cine.demo.entities.tmdb.Search;
 import com.cine.demo.services.MediaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ public class MediaController {
     private MediaService mediaService;
 
     @GetMapping(value= {"/searchMedia/{name}", "/searchMedia/{name}/{nbPage}"})
-    public @ResponseBody ResponseEntity<Iterable<Media>> searchMedia(@PathVariable String name, @PathVariable(required = false) String nbPage){
+    public @ResponseBody ResponseEntity<Search> searchMedia(@PathVariable String name, @PathVariable(required = false) String nbPage){
         if(nbPage == null){
             nbPage = "1";
         }

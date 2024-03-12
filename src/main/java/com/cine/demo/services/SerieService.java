@@ -1,10 +1,7 @@
 package com.cine.demo.services;
 
-import com.cine.demo.entities.tmdb.Genre;
+import com.cine.demo.entities.tmdb.*;
 
-import com.cine.demo.entities.tmdb.Movie;
-import com.cine.demo.entities.tmdb.Saison;
-import com.cine.demo.entities.tmdb.Serie;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
@@ -31,7 +28,7 @@ public class SerieService {
     @Autowired
     private GenreService genreService;
 
-    public Iterable<Serie> getAllSeries(String nbPage) {
+    public Iterable<Media> getAllSeries(String nbPage) {
         ResponseEntity<Map> response = restTemplate.exchange(
                 this.URL + "tv/popular?language=fr-FR&page=" + nbPage,
                 HttpMethod.GET,
@@ -41,7 +38,7 @@ public class SerieService {
         return createSerieArray(response);
     }
 
-    public Iterable<Serie> searchSeries(String name, String nbPage) {
+    public Search searchSeries(String name, String nbPage) {
         ResponseEntity<Map> response = restTemplate.exchange(
                 this.URL + "search/tv?query=" + name + "&include_adult=false&language=fr-FR&page=" + nbPage,
                 HttpMethod.GET,
@@ -49,7 +46,7 @@ public class SerieService {
                 Map.class
         );
 
-        return createSerieArray(response);
+        return new Search((int) response.getBody().get("total_pages"),(int) response.getBody().get("total_results"), createSerieArray(response));
     }
 
     public Serie getSerieDetail(int idSerie) {
@@ -88,9 +85,9 @@ public class SerieService {
         return createSerie(body, genresSerie, saisonsSerie, (int) body.get("number_of_episodes"), (int) body.get("number_of_seasons"));
     }
 
-    private Iterable<Serie> createSerieArray(ResponseEntity<Map> response) {
+    private Iterable<Media> createSerieArray(ResponseEntity<Map> response) {
         // ARRAY DE RETOUR (LISTE DE SERIES)
-        ArrayList<Serie> series = new ArrayList<>();
+        ArrayList<Media> medias = new ArrayList<>();
 
         // BODY DU RETOUR DE L'APPEL API
         ArrayList body = (ArrayList) response.getBody().get("results");
@@ -114,11 +111,12 @@ public class SerieService {
                     }
                 }
             }
-
+            Serie serie = createSerie(serieInfo, genresSeries, null, 0, 0);
+            Media media = (Media) serie;
             // CREATION ET AJOUT D'UNE SERIE A L'ARRAY DE RETOUR
-            series.add(createSerie(serieInfo, genresSeries, null, 0, 0));
+            medias.add(media);
         }
-        return series;
+        return medias;
     }
 
     private Serie createSerie(Map body, Iterable<Genre> genres, Iterable<Saison> saisons, int numberEpisodes, int numberSaisons) {

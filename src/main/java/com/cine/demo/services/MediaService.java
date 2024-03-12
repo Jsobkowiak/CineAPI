@@ -2,11 +2,13 @@ package com.cine.demo.services;
 
 import com.cine.demo.entities.tmdb.Media;
 import com.cine.demo.entities.tmdb.Movie;
+import com.cine.demo.entities.tmdb.Search;
 import com.cine.demo.entities.tmdb.Serie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 @Service
 public class MediaService {
@@ -17,12 +19,15 @@ public class MediaService {
     @Autowired
     private SerieService serieService;
 
-    public Iterable<Media> searchMedias(String search, String page){
-        ArrayList<Movie> movies =  (ArrayList<Movie>) this.movieService.searchFilms(search, "1");
-        ArrayList<Serie> series = (ArrayList<Serie>) this.serieService.searchSeries(search, "1");
+    public Search searchMedias(String search, String page){
+        Search movies = this.movieService.searchFilms(search, "1");
+        Search series = this.serieService.searchSeries(search, "1");
         ArrayList<Media> result = new ArrayList<>();
-        result.addAll(movies);
-        result.addAll(series);
-        return result;
+        int total_pages = movies.getTotal_pages() + series.getTotal_pages();
+        int total_results = movies.getTotal_results() + series.getTotal_results();
+        result.addAll((ArrayList<Media>) movies.getMedias());
+        result.addAll((ArrayList<Media>) series.getMedias());
+
+        return new Search(total_pages, total_results, result);
     }
 }
