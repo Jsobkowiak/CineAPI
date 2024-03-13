@@ -1,6 +1,8 @@
 package com.cine.demo.controllers.tmdb;
 
+import com.cine.demo.entities.tmdb.Media;
 import com.cine.demo.entities.tmdb.Movie;
+import com.cine.demo.entities.tmdb.Search;
 import com.cine.demo.services.MovieService;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @Controller
 @RequestMapping(path = "/tmdb")
 public class MovieController {
@@ -15,7 +18,7 @@ public class MovieController {
     @Autowired
     private MovieService movieService;
     @GetMapping(value = {"/getPopularMovies", "/getPopularMovies/{nbPage}"})
-    public @ResponseBody ResponseEntity<Iterable<Movie>> getPopularMovies(@PathVariable(required = false) String nbPage){
+    public @ResponseBody ResponseEntity<Iterable<Media>> getPopularMovies(@PathVariable(required = false) String nbPage){
         if(nbPage == null){
             nbPage = "1";
         }
@@ -23,7 +26,7 @@ public class MovieController {
     }
 
     @GetMapping(value= {"/searchMovies/{name}", "/searchMovies/{name}/{nbPage}"})
-    public @ResponseBody ResponseEntity<Iterable<Movie>> searchMovies(@PathVariable String name, @PathVariable(required = false) String nbPage){
+    public @ResponseBody ResponseEntity<Search> searchMovies(@PathVariable String name, @PathVariable(required = false) String nbPage){
         if(nbPage == null){
             nbPage = "1";
         }
