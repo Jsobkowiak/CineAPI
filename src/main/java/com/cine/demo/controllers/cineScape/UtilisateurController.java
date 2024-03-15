@@ -5,11 +5,14 @@ import com.cine.demo.repositories.UtilisateurRepository;
 import com.cine.demo.services.AuthService;
 import com.google.common.hash.Hashing;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
 
@@ -38,8 +41,16 @@ public class UtilisateurController {
         user.setPassword(Hashing.sha256()
                 .hashString(user.getPassword(), StandardCharsets.UTF_8)
                 .toString());
-        repository.save(user);
-        return ResponseEntity.ok("User created");
+        user.setDatecreation(new Date());
+        Optional<Utilisateur> userExist = repository.findByEmail(user.getEmail());
+        if(userExist.isEmpty())
+        {
+            repository.save(user);
+            return ResponseEntity.status(HttpStatus.CREATED).body("User created");
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("email already exists");
+        }
+
     }
 
     @PostMapping(path = "/authUtilisateur")
