@@ -30,7 +30,7 @@ public class SerieService {
 
     public Iterable<Media> getAllSeries(String nbPage) {
         ResponseEntity<Map> response = restTemplate.exchange(
-                this.URL + "tv/popular?language=fr-FR&page=" + nbPage,
+                this.URL + "tv/popular?language=en-US&page=" + nbPage,
                 HttpMethod.GET,
                 HttpEntityService.createHttpEntity(),
                 Map.class
@@ -40,7 +40,7 @@ public class SerieService {
 
     public Search searchSeries(String name, String nbPage) {
         ResponseEntity<Map> response = restTemplate.exchange(
-                this.URL + "search/tv?query=" + name + "&include_adult=false&language=fr-FR&page=" + nbPage,
+                this.URL + "search/tv?query=" + name + "&include_adult=false&language=en-US&page=" + nbPage,
                 HttpMethod.GET,
                 HttpEntityService.createHttpEntity(),
                 Map.class
@@ -51,7 +51,7 @@ public class SerieService {
 
     public Serie getSerieDetail(int idSerie) {
         ResponseEntity<Map> response = restTemplate.exchange(
-                this.URL + "/tv/" + idSerie + "?language=fr-FR",
+                this.URL + "/tv/" + idSerie + "?language=en-US",
                 HttpMethod.GET,
                 HttpEntityService.createHttpEntity(),
                 Map.class

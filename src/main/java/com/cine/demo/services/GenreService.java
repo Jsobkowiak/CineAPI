@@ -22,7 +22,7 @@ public class GenreService {
 
     public Iterable<Genre> getAllMovieGenres() {
         ResponseEntity<Map> response = this.restTemplate.exchange(
-                this.URL + "movie/list?language=fr",
+                this.URL + "movie/list?language=en-US",
                 HttpMethod.GET,
                 HttpEntityService.createHttpEntity(),
                 Map.class
@@ -32,7 +32,7 @@ public class GenreService {
 
     public Iterable<Genre> getAllSerieGenres() {
         ResponseEntity<Map> response = restTemplate.exchange(
-                this.URL + "tv/list?language=fr",
+                this.URL + "tv/list?language=en-US",
                 HttpMethod.GET,
                 HttpEntityService.createHttpEntity(),
                 Map.class

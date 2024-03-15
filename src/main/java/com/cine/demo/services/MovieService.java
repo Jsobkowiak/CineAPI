@@ -33,7 +33,7 @@ public class MovieService {
 
     public Iterable<Media> getAllMovies(String nbPage) {
         ResponseEntity<Map> response = restTemplate.exchange(
-                this.URL + "/movie/popular?language=fr-FR&page=" + nbPage,
+                this.URL + "/movie/popular?language=en-US&page=" + nbPage,
                 HttpMethod.GET,
                 HttpEntityService.createHttpEntity(),
                 Map.class
@@ -43,7 +43,7 @@ public class MovieService {
 
     public Search searchFilms(String name, String nbPage) {
         ResponseEntity<Map> response = restTemplate.exchange(
-                this.URL + "search/movie?query=" + name + "&include_adult=false&language=fr-FR&page=" + nbPage,
+                this.URL + "search/movie?query=" + name + "&include_adult=false&language=en-US&page=" + nbPage,
                 HttpMethod.GET,
                 HttpEntityService.createHttpEntity(),
                 Map.class
@@ -53,7 +53,7 @@ public class MovieService {
 
     public Movie getMovieDetail(int idMovie) {
         ResponseEntity<Map> response = restTemplate.exchange(
-                this.URL + "/movie/" + idMovie + "?language=fr-FR",
+                this.URL + "/movie/" + idMovie + "?language=en-US",
                 HttpMethod.GET,
                 HttpEntityService.createHttpEntity(),
                 Map.class
