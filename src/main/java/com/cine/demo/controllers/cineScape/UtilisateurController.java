@@ -16,7 +16,6 @@ import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @Controller
 @RequestMapping(path = "/cineScape")
 public class UtilisateurController {
@@ -43,14 +42,12 @@ public class UtilisateurController {
                 .toString());
         user.setDatecreation(new Date());
         Optional<Utilisateur> userExist = repository.findByEmail(user.getEmail());
-        if(userExist.isEmpty())
-        {
+        if (userExist.isEmpty()) {
             repository.save(user);
             return ResponseEntity.status(HttpStatus.CREATED).body("User created");
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("email already exists");
         }
-
     }
 
     @PostMapping(path = "/authUtilisateur")

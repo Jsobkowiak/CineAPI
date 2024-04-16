@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @Controller
 @RequestMapping(path = "/tmdb")
 public class GenreMediaController {

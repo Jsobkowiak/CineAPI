@@ -1,5 +1,6 @@
 package com.cine.demo.entities.cineScape;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

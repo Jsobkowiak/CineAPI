@@ -3,13 +3,14 @@ package com.cine.demo.controllers.cineScape;
 import com.cine.demo.entities.cineScape.Note;
 import com.cine.demo.repositories.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @Controller
 @RequestMapping(path = "/cineScape")
 public class NoteController {
@@ -27,9 +28,14 @@ public class NoteController {
         return repository.findById(id);
     }
 
+    @GetMapping(path="/getNotesByMovieId/{id}&nature={nature}")
+    public @ResponseBody List<Note> getNotesByMediaIdAndNature(@PathVariable Long id, @PathVariable String nature){
+        return repository.getNotesByIdMediaAndNature(id, nature);
+    }
+
     @PostMapping(path = "/postNote")
     public @ResponseBody ResponseEntity<String> postNote(@RequestBody Note com){
         repository.save(com);
-        return ResponseEntity.ok("note created");
+        return ResponseEntity.status(HttpStatus.CREATED).body("Note created");
     }
 }

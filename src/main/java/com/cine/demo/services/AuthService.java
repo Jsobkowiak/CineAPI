@@ -33,14 +33,8 @@ public class AuthService {
             Utilisateur user = userOptionnal.get();
             if(authUser(user, password)){
                 Map<String, Object> mapResult = new HashMap<>();
-                HashMap<String, String> userMap = new HashMap<>();
-
                 mapResult.put("token", generateJwt(user));
-                userMap.put("email", user.getEmail());
-                userMap.put("id", user.getId().toString());
-
-                mapResult.put("user", userMap);
-
+                mapResult.put("user", user);
                 result = ResponseEntity.ok(mapResult);
             } else {
                 Map<String, Object> map = new HashMap<>();

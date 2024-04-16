@@ -3,13 +3,13 @@ package com.cine.demo.controllers.cineScape;
 import com.cine.demo.entities.cineScape.Message;
 import com.cine.demo.repositories.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @Controller
 @RequestMapping(path = "/cineScape")
 public class MessageController {
@@ -30,6 +30,5 @@ public class MessageController {
     @PostMapping(path = "/postMessage")
     public @ResponseBody ResponseEntity<String> postMessage(@RequestBody Message com){
         repository.save(com);
-        return ResponseEntity.ok("message created");
-    }
+        return ResponseEntity.status(HttpStatus.CREATED).body("Message created");    }
 }

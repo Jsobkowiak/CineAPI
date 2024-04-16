@@ -27,4 +27,7 @@ public class Note {
 
     @Column(name="id_media")
     private Long idMedia;
+
+    @Column(name="nature")
+    private String nature;
 }
