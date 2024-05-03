@@ -1,6 +1,5 @@
 package com.cine.demo.entities.cineScape;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,7 +20,6 @@ public class WishlistTodo {
 
     @ManyToOne
     @JoinColumn(name = "id_utilisateur", nullable=false)
-    @JsonIgnore
     private Utilisateur idUtilisateur;
 
     @Column(name="id_media")

@@ -18,7 +18,7 @@ public class WishlistDidController {
     private WishlistDidRepository repository;
 
 
-    @GetMapping(path="/getAllWishlistDidByUser")
+    @PostMapping(path="/getAllWishlistDidByUser")
     public @ResponseBody Iterable<WishlistDid> getAllWishlistDidByUser(@RequestBody Utilisateur user){
         return repository.findByIdUtilisateur(user);
     }
@@ -27,5 +27,11 @@ public class WishlistDidController {
     public @ResponseBody ResponseEntity<String> postWishlistDid(@RequestBody WishlistDid wishlistDid){
         repository.save(wishlistDid);
         return ResponseEntity.status(HttpStatus.CREATED).body("WishlistDid created");
+    }
+
+    @DeleteMapping(path = "/deleteWishlistDid/{id}")
+    public @ResponseBody ResponseEntity<String> deleteWishlistDid(@PathVariable Long id){
+        repository.deleteById(id);
+        return ResponseEntity.status(HttpStatus.OK).body("WishlistDid deleted");
     }
 }

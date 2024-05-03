@@ -1,13 +1,17 @@
 package com.cine.demo.controllers.cineScape;
 
+import com.cine.demo.entities.DTO.CategorieForumDTO;
+import com.cine.demo.entities.DTO.CommentaireDTO;
 import com.cine.demo.entities.cineScape.Commentaire;
 import com.cine.demo.repositories.CommentaireRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Controller
@@ -16,15 +20,23 @@ public class CommentaireController {
     @Autowired
     private CommentaireRepository repository;
 
+    ModelMapper modelMapper = new ModelMapper();
+
 
     @GetMapping(path="/getAllCommentaire")
-    public @ResponseBody Iterable<Commentaire> getAllCommentaire(){
-        return repository.findAll();
+    public @ResponseBody Iterable<CommentaireDTO> getAllCommentaire(){
+        Iterable<Commentaire> comList = repository.findAll();
+        ArrayList<CommentaireDTO> comDTOList = new ArrayList<>();
+        for(Commentaire c: comList){
+            CommentaireDTO comDTO = modelMapper.map(c, CommentaireDTO.class);
+            comDTOList.add(comDTO);
+        }
+        return comDTOList;
     }
 
     @GetMapping(path="/getCommentaire/{id}")
-    public @ResponseBody Optional<Commentaire> getCommentaireById(@PathVariable Long id){
-        return repository.findById(id);
+    public @ResponseBody CommentaireDTO getCommentaireById(@PathVariable Long id){
+        return modelMapper.map(repository.findById(id), CommentaireDTO.class);
     }
 
     @PostMapping(path = "/postCommentaire")

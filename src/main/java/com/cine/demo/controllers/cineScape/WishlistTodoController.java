@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import java.net.URI;
+
 
 
 @Controller
@@ -18,7 +18,7 @@ public class WishlistTodoController {
     private WishlistTodoRepository repository;
 
 
-    @GetMapping(path="/getAllWishlistTodoByUser")
+    @PostMapping(path="/getAllWishlistTodoByUser")
     public @ResponseBody Iterable<WishlistTodo> getAllWishlistTodoByUser(@RequestBody Utilisateur user){
         return repository.findByIdUtilisateur(user);
     }
@@ -27,5 +27,11 @@ public class WishlistTodoController {
     public @ResponseBody ResponseEntity<String> postWishlistTodo(@RequestBody WishlistTodo wishlistTodo){
         repository.save(wishlistTodo);
         return ResponseEntity.status(HttpStatus.CREATED).body("WishlistTodo created");
+    }
+
+    @DeleteMapping(path = "/deleteWishlistTodo/{id}")
+    public @ResponseBody ResponseEntity<String> deleteWishlistTodo(@PathVariable Long id){
+        repository.deleteById(id);
+        return ResponseEntity.status(HttpStatus.OK).body("WishlistTodo deleted");
     }
 }

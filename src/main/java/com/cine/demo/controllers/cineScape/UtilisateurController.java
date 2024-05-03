@@ -1,17 +1,19 @@
 package com.cine.demo.controllers.cineScape;
 
+import com.cine.demo.entities.DTO.UtilisateurDTO;
 import com.cine.demo.entities.cineScape.Utilisateur;
 import com.cine.demo.repositories.UtilisateurRepository;
 import com.cine.demo.services.AuthService;
 import com.google.common.hash.Hashing;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
@@ -25,14 +27,22 @@ public class UtilisateurController {
     @Autowired
     private AuthService authService;
 
+    ModelMapper modelMapper = new ModelMapper();
+
     @GetMapping(path = "/getAllUtilisateurs")
-    public @ResponseBody Iterable<Utilisateur> getAllUtilisateurs() {
-        return repository.findAll();
+    public @ResponseBody Iterable<UtilisateurDTO> getAllUtilisateurs() {
+        Iterable<Utilisateur> users = repository.findAll();
+        ArrayList<UtilisateurDTO> usersDTO = new ArrayList<>();
+        for(Utilisateur u: users){
+            UtilisateurDTO utilisateurDTO = modelMapper.map(u, UtilisateurDTO.class);
+            usersDTO.add(utilisateurDTO);
+        }
+        return usersDTO;
     }
 
     @GetMapping(path = "/getUtilisateur/{id}")
-    public @ResponseBody Optional<Utilisateur> getUtilisateurById(@PathVariable Long id) {
-        return repository.findById(id);
+    public @ResponseBody UtilisateurDTO getUtilisateurById(@PathVariable Long id) {
+        return modelMapper.map(repository.findById(id), UtilisateurDTO.class);
     }
 
     @PostMapping(path = "/postUtilisateur")
