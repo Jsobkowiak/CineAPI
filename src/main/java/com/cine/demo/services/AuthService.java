@@ -1,11 +1,13 @@
 package com.cine.demo.services;
 
+import com.cine.demo.entities.DTO.UtilisateurDTO;
 import com.cine.demo.entities.cineScape.Utilisateur;
 import com.cine.demo.repositories.UtilisateurRepository;
 import com.google.common.hash.Hashing;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import jdk.jshell.execution.Util;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -32,9 +34,11 @@ public class AuthService {
         if(userOptionnal.isPresent()){
             Utilisateur user = userOptionnal.get();
             if(authUser(user, password)){
+                ModelMapper modelMapper = new ModelMapper();
                 Map<String, Object> mapResult = new HashMap<>();
                 mapResult.put("token", generateJwt(user));
-                mapResult.put("user", user);
+                UtilisateurDTO utilisateurDTO = modelMapper.map(user, UtilisateurDTO.class);
+                mapResult.put("user", utilisateurDTO);
                 result = ResponseEntity.ok(mapResult);
             } else {
                 Map<String, Object> map = new HashMap<>();
