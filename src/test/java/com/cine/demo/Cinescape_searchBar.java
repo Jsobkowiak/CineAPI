@@ -1,16 +1,15 @@
 package com.cine.demo;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-
-public class Cinescape_login {
+public class Cinescape_searchBar {
     public static void main(String[] args) {
-
 // objects and variables instantiation
         WebDriver driver = new FirefoxDriver();
-        String appUrl = "http://localhost:4200/signin";
+        String appUrl = "http://localhost:4200/home";
 
 // launch the firefox browser and open the application url
         driver.get(appUrl);
@@ -35,18 +34,16 @@ public class Cinescape_login {
         }
 
 // enter a valid username in the email textbox
-        WebElement email = driver.findElement(By.id("email"));
-        email.clear();
-        email.sendKeys("loupmayeur2003@gmail.com");
+        WebElement searchBar = driver.findElement(By.id("search-dropdown"));
+        searchBar.clear();
+        searchBar.sendKeys("spiderman");
 
 // enter a valid password in the password textbox
-        WebElement password = driver.findElement(By.id("password"));
-        password.clear();
-        password.sendKeys("test");
+
 
         // click on the Sign-in button
-        WebElement SignInButton = driver.findElement(By.id("signIn"));
-        SignInButton.click();
+        WebElement searchButton = driver.findElement(By.id("searchButton"));
+        searchButton.click();
 
 // close the web browser
         //driver.close();

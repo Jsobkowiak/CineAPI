@@ -18,7 +18,7 @@ public class GenreService {
     private final String URL = "https://api.themoviedb.org/3/genre/";
 
     @Autowired
-    private RestTemplate restTemplate;
+    public RestTemplate restTemplate;
 
     public Iterable<Genre> getAllMovieGenres() {
         ResponseEntity<Map> response = this.restTemplate.exchange(
